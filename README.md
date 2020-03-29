@@ -1,13 +1,13 @@
 # amqp.test
 This repo is intended to simply test the rabbitmq service
 
-Available server environent
+Available server environment
 - local/alpha (default)
 - beta
 - production
 
 ## How to make it works
-Clone this repo and go to root directory, then run
+Clone this repo and go to root directory of this project / folder, then run
 ```
 npm install
 ```
