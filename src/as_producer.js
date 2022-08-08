@@ -20,6 +20,7 @@ var user = process.env.AMQP_USER;
 var pass = process.env.AMQP_PASS;
 var host = process.env.AMQP_HOST;
 var vhost = process.env.AMQP_VHOST;
+
 var isSecure =
     process.env.AMQP_IS_SECURE !== undefined
         ? process.env.AMQP_IS_SECURE === 'false'
@@ -42,6 +43,8 @@ const options = {
     autoDelete: true,
     arguments: {
         'x-expires': 120000,
+        'x-messageTtl': 30000,
+        'x-deadLetterExchange': 'vhuser_dlx',
     },
 };
 
@@ -55,6 +58,8 @@ open.then(
     }
 )
     .then(function(ch) {
+        /*
+        create, binding, send test message
         return ch.assertQueue(q, options).then(function(ok) {
             //return ch.sendToQueue(q, Buffer.from('something to do'));
             let total = 1000;
@@ -67,5 +72,6 @@ open.then(
                 total = total - 1;
             }
         });
+        */
     })
     .catch(console.warn);

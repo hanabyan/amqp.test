@@ -20,6 +20,7 @@ var user = process.env.AMQP_USER;
 var pass = process.env.AMQP_PASS;
 var host = process.env.AMQP_HOST;
 var vhost = process.env.AMQP_VHOST;
+
 var isSecure =
     process.env.AMQP_IS_SECURE !== undefined
         ? process.env.AMQP_IS_SECURE === 'false'
@@ -41,7 +42,7 @@ var open = require('amqplib').connect(
 const options = {
     autoDelete: true,
     arguments: {
-        'x-expires': 60000,
+        'x-expires': 120000,
     },
 };
 
@@ -55,6 +56,10 @@ open.then(
     }
 )
     .then(function(ch) {
+        console.log('connection success');
+        return;
+        /*
+        create/binding/listen to queue
         return ch.assertQueue(q, options).then(function(ok) {
             return ch.consume(q, function(msg) {
                 if (msg !== null) {
@@ -63,5 +68,6 @@ open.then(
                 }
             });
         });
+        */
     })
     .catch(console.warn);
